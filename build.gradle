@@ -3,6 +3,7 @@ plugins {
 	id 'java'
     id 'eclipse'
     id 'idea'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "4.0.30"
 }
 
 group 'co.edu.udea.certificacion'
@@ -49,8 +50,12 @@ dependencies {
 
 }
 
-tasks.named('test') {
-    // System configs
 
+tasks.named('clean', Delete) {
+    delete "target"
 }
 
+tasks.named('test') {
+    testLogging.showStandardStreams = true
+    finalizedBy 'aggregate'
+}
